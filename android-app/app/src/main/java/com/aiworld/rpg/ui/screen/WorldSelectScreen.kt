@@ -116,6 +116,7 @@ fun WorldSelectScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun WorldTypeCard(
     title: String,

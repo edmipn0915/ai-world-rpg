@@ -18,15 +18,12 @@ class ModelRouter @Inject constructor(
     }
 
     fun getAvailableModels(): List<ModelInfo> {
-        return buildList {
-            addAll(localLlmService.getAvailableModels())
-            add(
-                ModelInfo("gpt-4o", "GPT-4o", ModelProvider.OPENAI),
-                ModelInfo("gpt-4o-mini", "GPT-4o Mini", ModelProvider.OPENAI),
-                ModelInfo("deepseek-chat", "DeepSeek Chat", ModelProvider.DEEPSEEK),
-                ModelInfo("gemini-1.5-pro", "Gemini 1.5 Pro", ModelProvider.GEMINI),
-                ModelInfo("longcat-chat", "LongCat Chat", ModelProvider.LONGCAT)
-            )
-        }
+        return localLlmService.getAvailableModels() + listOf(
+            ModelInfo("gpt-4o", "GPT-4o", ModelProvider.OPENAI),
+            ModelInfo("gpt-4o-mini", "GPT-4o Mini", ModelProvider.OPENAI),
+            ModelInfo("deepseek-chat", "DeepSeek Chat", ModelProvider.DEEPSEEK),
+            ModelInfo("gemini-1.5-pro", "Gemini 1.5 Pro", ModelProvider.GEMINI),
+            ModelInfo("longcat-chat", "LongCat Chat", ModelProvider.LONGCAT)
+        )
     }
 }

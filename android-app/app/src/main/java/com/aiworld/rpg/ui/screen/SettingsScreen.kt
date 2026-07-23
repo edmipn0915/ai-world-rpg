@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
@@ -25,6 +25,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,15 +44,13 @@ fun SettingsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    val models = uiState.availableModels.map { it.id to it.name }
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("設定") },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "返回")
                     }
                 }
             )
@@ -86,7 +85,7 @@ fun SettingsScreen(
                         onExpandedChange = { modelExpanded = !modelExpanded }
                     ) {
                         OutlinedTextField(
-                            value = models.find { it.first == uiState.selectedModelId }?.second ?: uiState.selectedModelId,
+                            value = uiState.availableModels.find { it.id == uiState.selectedModelId }?.name ?: uiState.selectedModelId,
                             onValueChange = {},
                             readOnly = true,
                             label = { Text("預設模型") },
@@ -97,11 +96,11 @@ fun SettingsScreen(
                             expanded = modelExpanded,
                             onDismissRequest = { modelExpanded = false }
                         ) {
-                            models.forEach { (id, name) ->
+                            uiState.availableModels.forEach { model ->
                                 DropdownMenuItem(
-                                    text = { Text(name) },
+                                    text = { Text(model.name) },
                                     onClick = {
-                                        viewModel.setModel(id)
+                                        viewModel.setModel(model.id)
                                         modelExpanded = false
                                     }
                                 )
