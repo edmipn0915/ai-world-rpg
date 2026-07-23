@@ -1,0 +1,44 @@
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+build/
+local.properties
+proguard/
+*.log
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+*.keystore
+*.jars
+
+# IntelliJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Next.js / Node
+node_modules/
+.next/
+out/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# IGA Pages
+.iga/
